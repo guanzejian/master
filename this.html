@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>this</title>
+
+    <style>
+
+    </style>
+</head>
+<body>
+    <button type="button" class="box">点我</button>
+
+    <button type="button" id="dox">用输入框改变我</button>
+    <input type="text" id="inp" value="" style="display: none">
+</body>
+<script>
+
+    //this 指向 永远都是指向的都是当前对象
+
+    //  第一种
+    // 在函数外面的this  指向 window对象
+    console.log(this);  // window
+
+    //第二种
+    // 在函数内部 this 指向 当前函数对象实例
+    var oBox = document.getElementsByClassName("box")[0];
+    oBox.onclick = function(){
+        console.log(this);  // 这个this 就是 oBox     显示: <button class="box">点我</button>
+    }
+
+    // 第三种 
+    //如果 在 函数内部还有函数  ，希望更改 外部函数对象 的值 ：
+    var oDox = document.getElementById("dox");
+    var oInp = document.getElementById("inp");
+    
+    oDox.onclick = function(){
+        oInp.style.display = "block";
+
+        // 用that 保存 this 的指向；
+        var that = this;
+        oInp.onchange = function(){
+            var _val = oInp.value;
+            // 此处想要用this 改 oDox 上的字
+            //this.innerHTML = val;   // 错误eg
+            that.innerHTML = _val;  //正确
+        }
+    }
+
+
+</script>
+</html>
